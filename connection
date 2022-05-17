@@ -1,0 +1,6 @@
+<?php
+$host = 'localhost'; // адрес сервера 
+$database = 'lotki'; // имя базы данных
+$user = 'adminik'; // имя пользователя
+$password = '1Million'; // пароль
+?>
