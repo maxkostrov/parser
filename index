@@ -1,0 +1,20 @@
+<?php 
+
+header('Content-type: text/html; charset=utf-8');
+
+require 'phpQuery.php';
+
+$url = 'https://www.liga812.ru/104-pridvernyj-poddon';
+//$genurl = 'https://www.liga812.ru';
+
+
+$pruf = file_get_contents($url);  
+
+$gaf = phpQuery::newDocument($pruf);
+
+
+foreach($gaf->find('.product_list .left-block') as $teer)
+{
+ $teer = pq($teer); 
+//echo $teer;
+
