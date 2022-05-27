@@ -18,3 +18,174 @@ foreach($gaf->find('.product_list .left-block') as $teer)
  $teer = pq($teer); 
 //echo $teer;
 
+/* 
+$names = $teer->find('.name')->text();
+$name = trim($names); 
+
+$price = $teer->find('.top_roz_cena_ol')->text();    //ty-product-bigpicture__prices
+$prices = (int)preg_replace("/[^,.0-9]/", '', $price); /*
+
+$prices = 0; 
+
+$image11 = $teer->find('.sect-catalog__img img:eq(0)')->attr('src');
+$image1 = $genurl.$image11; /*
+$image22 = $teer->find('.sect-catalog__img img:eq(1)')->attr('src');
+$image2 = $genurl.$image22;
+$image33 = $teer->find('.sect-catalog__img img:eq(2)')->attr('src'); 
+$image3 = $genurl.$image33; /*
+ 
+$prii = $teer->find('.product-details .price-tax')->text(); 
+$pri = (int)preg_replace("/[^,.0-9]/", '', $prii);    */
+
+
+  $perehod = $teer->find('.product-image-container a')->attr('href'); 
+ //  $perehod = $genurl.$per;    
+ 
+      $naf = file_get_contents($perehod); 
+	 
+	          $look = phpQuery::newDocument($naf); 
+			  
+			 $names = pq($look)->find('.pb-center-column h1')->text();
+              $name =   str_replace("'", '', $names);             //trim($names); 
+			  
+			  $price = pq($look)->find('.content_prices .price')->text();
+			  $prices = (int)preg_replace("/[^,.0-9]/", '', $price);  
+			  
+			  
+			  $image1 = pq($look)->find('.pb-left-column img')->attr('src'); 
+			  $image2 = pq($look)->find('.pb-left-column a:eq(1)')->attr('href');
+			  $image3 = pq($look)->find('.pb-left-column a:eq(2)')->attr('href'); 
+		//	  $image4 = pq($look)->find('.pb-left-column a:eq(2)')->attr('href');
+			  
+			  /*
+			  $image5 = pq($look)->find('.image-additional a:eq(4)')->attr('href'); 
+			  $descrip = pq($look)->find('.tab-desc-left')->text(); 
+	          $descrpt = 'КАК';
+	          $pos = strpos($descrip, $descrpt); 
+              $opisanie = substr($descrip, 0, $pos-1);  */
+			 
+			 
+		//	  $opisanie1 = pq($look)->find('.pb-center-column div:eq(1)')->html();    //pb-center-column div:eq(1)    1-я строка опиания
+		
+		     $opisanie1 = pq($look)->find('.page-product-box:eq(0) h2')->text(); 
+
+			 $opisanie2 = pq($look)->find('.page-product-box:eq(0) p:eq(0)')->text(); 
+
+			$opisanie3 = pq($look)->find('.pb-center-column div:eq(1)')->html(); /*
+
+            
+			 
+		     $opisanie1 = pq($look)->find('.page-product-box:eq(0) h2')->text();    //pb-center-column div:eq(1)    1-я строка опиания
+
+             $opisanie2 = pq($look)->find('.page-product-box:eq(0) p:eq(0)')->text(); // 2-я строка описания
+			 
+			 $opisanie3 = pq($look)->find('.page-product-box:eq(0) p:eq(1)')->text(); /*   3-я строка опсания 
+
+             $opisanie4 = pq($look)->find('.rte ul)')->text(); 
+
+             $opisanie5 = pq($look)->find('.right_block .tab-content p:eq(3)')->text();  */
+			 
+			 $opisanie7 =  $opisanie1  .  '<br>' . $opisanie2 .  '<br>' . $opisanie3;  
+
+             $opisanie = str_replace("'", '', $opisanie7); /*
+			 
+			 $opisanie5 = ''; 
+			 
+			 $opisanie6 = pq($look)->find('.tab-pane:eq(1)')->html(); 
+			 
+			 /*
+
+             $opisanie5 = pq($look)->find('.tab-content h2:eq(1)')->html();	
+
+             $opisanie6 = pq($look)->find('.tab-content ul:eq(1)')->html();	
+			 
+			 
+			 /*            // p:eq(0)    div:eq(1)  p  html   /!//   '<br>'  . $opisanie5 .'<br>' . $opisanie2  .'<br>'  . $opisanie5 .
+			  
+			//$opisanie2 = pq($look)->find('.row .tab-content .tab-pane .attributes')->html();   //'<br>' . $opisanie5 .'<br>' . $opisanie2  .
+			
+            $opisanie =  $opisanie1  .  '<br>' .$opisanie5 .'<br>'. $opisanie2 .'<br>' .$opisanie5. '<br>'. $opisanie3 .'<br>'.$opisanie5 . '<br>'. $opisanie4 .'<br>'. $opisanie5 . '<br>' .$opisanie6;  
+			
+			$articls =   rand(9500000, 9600000);
+			
+			
+			*/
+			$articls = rand(90000000, 100000000); //pq($look)->find('.product-item-detail-properties dd')->text();  
+			
+		/*	$articls = pq($look)->find('.product-details td:eq(3)')->text();  // при отсутствии артикля заменяли на 12345   .list-unstyled .li:eq(1)
+			
+			$descrpt = 'товара';
+	          $pos = strpos($articls, $descrpt); 
+              $articl = substr($articls, 0, $pos+1);
+			
+		 if(!empty($articls)){
+				
+				$articl = $articls;
+			}
+			else{
+				
+				$articl = 12345;
+			}
+				
+			
+			/*
+			  $opisanie3 = pq($look)->find('.tab-content div:eq(3))')->html();
+			  $opisanie4 = pq($look)->find('.tab-content div:eq(4)')->html(); 
+			  $opisanie5 = pq($look)->find('.tab-content div:eq(5)')->html();
+			  $opisanie6 = pq($look)->find('.tab-content span:eq(4)')->html(); 
+			  $opisanie = $opisanie1.'<br>'.$opisanie2.'<br>'.$opisanie3.'<br>'.$opisanie4.'<br>'; /*.$opisanie5.'<br>'.$opisanie6; /*
+             $descrpt = 'Гарантия';
+	          $pos = strpos($desct, $descrpt);
+              $opisanie = substr($desct, 0, $pos+1);    
+              		  
+                 //  }    
+      */
+	//	echo "<img src = $image1>"; 
+	//	echo "<img src = '$image2'>"; 
+	//	echo "<img src = '$image3'>"; 
+	//	echo "<img src = '$image4'>";
+	//	echo "<img src = '$image5'>"; 
+	
+	
+		//echo $teer;  
+	//	echo $name . '<br>'; 
+	//	echo $perehod . '<br>';
+    //    echo $per . '<br>'; 
+//		
+	//	echo $prices . '<br>';  
+	//	echo $image1; 
+	//	echo $articls . '<br>';   
+//	echo $perehod . '<br>'; 
+       
+    //	echo $opisanie;
+	//	echo '<hr>'; 
+			  
+			 			
+		// создаём папку если таковой нет
+if (!file_exists("poddon")) 
+{
+   mkdir("poddon", 0700); // создаём папку
+}
+ 
+$move_dir = "poddon/"; // Директория созданной папки
+
+$filename1 =   rand(9500000, 9600000).'.jpg'; // Имя картинки rand(9500000, 9600000).'.jpg';   //
+//$filename2 =   rand(9500000, 9600000).'.jpg'; //rand(9700000, 9800000).'.jpg';    //
+//$filename3 =   rand(9500000, 9600000).'.jpg'; //rand(9900000, 19400000).'.jpg';   // 
+//$filename4 = basename($image4);
+//$filename5 = basename($image5); 
+
+$putin1 = 'catalog/' . $move_dir.$filename1;
+file_put_contents($move_dir.'/'.$filename1, file_get_contents($image1)); 
+
+//$putin2 = 'catalog/' . $move_dir.$filename2;
+//file_put_contents($move_dir.'/'.$filename2, file_get_contents($image2)); 
+
+//$putin3 = 'catalog/' . $move_dir.$filename3;
+//file_put_contents($move_dir.'/'.$filename3, file_get_contents($image3)); 
+
+//$putin4 = 'catalog/' . $move_dir.$filename4;
+//file_put_contents($move_dir.'/'.$filename4, file_get_contents($image4)); /*
+
+//$putin5 = 'catalog/' . $move_dir.$filename5;
+//file_put_contents($move_dir.'/'.$filename5, file_get_contents($image5)); 
