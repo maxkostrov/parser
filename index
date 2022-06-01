@@ -189,3 +189,94 @@ file_put_contents($move_dir.'/'.$filename1, file_get_contents($image1));
 
 //$putin5 = 'catalog/' . $move_dir.$filename5;
 //file_put_contents($move_dir.'/'.$filename5, file_get_contents($image5)); 
+
+require 'connection.php';
+
+if (!empty($name)) 
+{
+
+	$mysql = mysqli_connect($host, $user, $password, $database)
+or die (Ошибка . mysqli_error($mysql));
+
+//--  вычисляем максимальный номер товара в таблице
+$select = mysqli_query ($mysql, "SELECT MAX(product_id) AS product_id FROM oc_product");    /* получение последнего id карточки товара  */
+$row3 = mysqli_fetch_array($select);
+$id_product = $row3[0]+1; // id для товара
+
+
+$tup = mysqli_query($mysql, "INSERT INTO oc_product (product_id, model, quantity, stock_status_id, image, manufacturer_id, shipping, price, date_available, weight_class_id, length_class_id, subtract, status) VALUES ('$id_product', '$articls', '100', '7', '$putin1', '11', '1', '$prices', '2022-01-31', '4', '1', '0', '1')");
+if ($tup == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+}
+
+$tupo = mysqli_query($mysql, "INSERT INTO oc_product_description (product_id, language_id, name, description, meta_title) VALUES ('$id_product', '1', '$name', '$opisanie', '$name')");
+if ($tupo == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+}  
+
+
+/*
+$tupolgm = mysqli_query($mysql, "INSERT INTO oc_product_image (product_id, image) VALUES ('$id_product', '$putin2')");
+if ($tupolgm == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+	
+}
+	
+	
+$tupolgms = mysqli_query($mysql, "INSERT INTO oc_product_image (product_id, image) VALUES ('$id_product', '$putin3')");
+if ($tupolgms == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+	
+}
+	/*
+	$tupolgml = mysqli_query($mysql, "INSERT INTO oc_product_image (product_id, image) VALUES ('$id_product', '$putin4')");
+if ($tupolgml == true) {
+    echo ("Добавление прошло успешно" . '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+	
+}
+
+	$tupolgmx = mysqli_query($mysql, "INSERT INTO oc_product_image (product_id, image) VALUES ('$id_product', '$putin5')");
+if ($tupolgmx == true) {
+    echo ("Добавление прошло успешно");
+} else {
+    echo ("Данные не были добавлены");
+
+}    
+*/
+
+	$tupolg = mysqli_query($mysql, "INSERT INTO oc_product_to_category (product_id, category_id, main_category) VALUES ('$id_product', '67', '1')");  /* запись привязки товара к категории в базу данных */
+if ($tupolg == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+}
+	
+		$tupolj = mysqli_query($mysql, "INSERT INTO oc_product_to_category (product_id, category_id, main_category) VALUES ('$id_product', '110', '0')"); /* запись привязки товара к категории в базу данных */
+if ($tupolj == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');
+}
+	
+		$tupolgf = mysqli_query($mysql, "INSERT INTO oc_product_to_store (product_id, store_id) VALUES ('$id_product', '0')");
+if ($tupolgf == true) {
+    echo ("Добавление прошло успешно". '<br>');
+} else {
+    echo ("Данные не были добавлены". '<br>');   /*  привязка товара к магазину в целом */
+}
+
+
+}   
+
+}     
+  $id_product++; 
